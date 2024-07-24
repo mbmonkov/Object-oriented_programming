@@ -5,28 +5,28 @@
 template <typename T>
 class WeakPtr
 {
-    // Обява на шаблонния клас SharedPtr, който има достъп до частните членове на WeakPtr.
+    // РћР±СЏРІР° РЅР° С€Р°Р±Р»РѕРЅРЅРёСЏ РєР»Р°СЃ SharedPtr, РєРѕР№С‚Рѕ РёРјР° РґРѕСЃС‚СЉРї РґРѕ С‡Р°СЃС‚РЅРёС‚Рµ С‡Р»РµРЅРѕРІРµ РЅР° WeakPtr.
     template<class V> friend class SharedPtr;
 
-    T* data;        // Указател към обекта, на който WeakPtr сочи.
-    Counter* counter; // Указател към структурата за броене на референции (Counter), която следи броя на Shared и Weak указатели.
+    T* data;        // РЈРєР°Р·Р°С‚РµР» РєСЉРј РѕР±РµРєС‚Р°, РЅР° РєРѕР№С‚Рѕ WeakPtr СЃРѕС‡Рё.
+    Counter* counter; // РЈРєР°Р·Р°С‚РµР» РєСЉРј СЃС‚СЂСѓРєС‚СѓСЂР°С‚Р° Р·Р° Р±СЂРѕРµРЅРµ РЅР° СЂРµС„РµСЂРµРЅС†РёРё (Counter), РєРѕСЏС‚Рѕ СЃР»РµРґРё Р±СЂРѕСЏ РЅР° Shared Рё Weak СѓРєР°Р·Р°С‚РµР»Рё.
 
     void copyFrom(const WeakPtr<T>& other);
     void free();
     void moveFrom(WeakPtr<T>&& other);
 
 public:
-    WeakPtr(); // Конструктор по подразбиране.
+    WeakPtr(); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ РїРѕРґСЂР°Р·Р±РёСЂР°РЅРµ.
 
-    WeakPtr(SharedPtr<T>& ptr); // Конструктор от SharedPtr.
-    WeakPtr(const WeakPtr<T>& other); // Конструктор за копиране.
-    WeakPtr& operator=(const WeakPtr<T>& other); // Оператор за присвояване.
+    WeakPtr(SharedPtr<T>& ptr); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РѕС‚ SharedPtr.
+    WeakPtr(const WeakPtr<T>& other); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° РєРѕРїРёСЂР°РЅРµ.
+    WeakPtr& operator=(const WeakPtr<T>& other); // РћРїРµСЂР°С‚РѕСЂ Р·Р° РїСЂРёСЃРІРѕСЏРІР°РЅРµ.
 
-    WeakPtr(WeakPtr<T>&& other); // Конструктор за преместване.
-    WeakPtr& operator=(WeakPtr<T>&& other); // Оператор за присвояване чрез преместване.
-    ~WeakPtr(); // Деструктор.
+    WeakPtr(WeakPtr<T>&& other); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° РїСЂРµРјРµСЃС‚РІР°РЅРµ.
+    WeakPtr& operator=(WeakPtr<T>&& other); // РћРїРµСЂР°С‚РѕСЂ Р·Р° РїСЂРёСЃРІРѕСЏРІР°РЅРµ С‡СЂРµР· РїСЂРµРјРµСЃС‚РІР°РЅРµ.
+    ~WeakPtr(); // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ.
 
-    // Функции за проверка на съществуването на обекта и за опит за получаване на SharedPtr
+    // Р¤СѓРЅРєС†РёРё Р·Р° РїСЂРѕРІРµСЂРєР° РЅР° СЃСЉС‰РµСЃС‚РІСѓРІР°РЅРµС‚Рѕ РЅР° РѕР±РµРєС‚Р° Рё Р·Р° РѕРїРёС‚ Р·Р° РїРѕР»СѓС‡Р°РІР°РЅРµ РЅР° SharedPtr
     SharedPtr<T> lock() const;
     bool expired() const;
 };
@@ -72,7 +72,7 @@ WeakPtr<T>::WeakPtr(SharedPtr<T>& ptr)
     counter = ptr.counter; 
 
     if (counter)
-        counter->addWeakPtr(); // Увеличаване на броя на Weak указатели в брояча.
+        counter->addWeakPtr(); // РЈРІРµР»РёС‡Р°РІР°РЅРµ РЅР° Р±СЂРѕСЏ РЅР° Weak СѓРєР°Р·Р°С‚РµР»Рё РІ Р±СЂРѕСЏС‡Р°.
 }
 
 template <typename T>
@@ -82,7 +82,7 @@ void WeakPtr<T>::copyFrom(const WeakPtr<T>& other)
     counter = other.counter; 
 
     if (counter)
-        counter->addWeakPtr(); // Увеличаване на броя на Weak указатели в брояча.
+        counter->addWeakPtr(); // РЈРІРµР»РёС‡Р°РІР°РЅРµ РЅР° Р±СЂРѕСЏ РЅР° Weak СѓРєР°Р·Р°С‚РµР»Рё РІ Р±СЂРѕСЏС‡Р°.
 }
 
 template <typename T>
@@ -91,9 +91,9 @@ void WeakPtr<T>::free()
     if (data == nullptr && counter == nullptr)
         return;
 
-    counter->removeWeakPtr(); // Намаляване на броя на Weak указатели в брояча.
-    if (counter->weakCount == 0) // Проверка дали няма повече Weak указатели.
-        delete counter; // Ако няма, изтриване на броячите.
+    counter->removeWeakPtr(); // РќР°РјР°Р»СЏРІР°РЅРµ РЅР° Р±СЂРѕСЏ РЅР° Weak СѓРєР°Р·Р°С‚РµР»Рё РІ Р±СЂРѕСЏС‡Р°.
+    if (counter->weakCount == 0) // РџСЂРѕРІРµСЂРєР° РґР°Р»Рё РЅСЏРјР° РїРѕРІРµС‡Рµ Weak СѓРєР°Р·Р°С‚РµР»Рё.
+        delete counter; // РђРєРѕ РЅСЏРјР°, РёР·С‚СЂРёРІР°РЅРµ РЅР° Р±СЂРѕСЏС‡РёС‚Рµ.
 }
 
 template <typename T>
@@ -122,14 +122,14 @@ WeakPtr<T>::~WeakPtr()
 template <typename T>
 bool WeakPtr<T>::expired() const
 {
-    return counter && counter->useCount == 0; // Проверка дали обектът е изтекъл (няма повече SharedPtrs).
+    return counter && counter->useCount == 0; // РџСЂРѕРІРµСЂРєР° РґР°Р»Рё РѕР±РµРєС‚СЉС‚ Рµ РёР·С‚РµРєСЉР» (РЅСЏРјР° РїРѕРІРµС‡Рµ SharedPtrs).
 }
 
 template <typename T>
 SharedPtr<T> WeakPtr<T>::lock() const
 {
     if (expired())
-        return SharedPtr<T>(); // Връща празен SharedPtr ако обектът е изтекъл.
+        return SharedPtr<T>(); // Р’СЂСЉС‰Р° РїСЂР°Р·РµРЅ SharedPtr Р°РєРѕ РѕР±РµРєС‚СЉС‚ Рµ РёР·С‚РµРєСЉР».
     else
-        return SharedPtr<T>(*this); // Връща нов SharedPtr, ако обектът все още съществува.
+        return SharedPtr<T>(*this); // Р’СЂСЉС‰Р° РЅРѕРІ SharedPtr, Р°РєРѕ РѕР±РµРєС‚СЉС‚ РІСЃРµ РѕС‰Рµ СЃСЉС‰РµСЃС‚РІСѓРІР°.
 }
