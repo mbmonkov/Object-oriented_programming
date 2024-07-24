@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-// Класът MyString представлява собствена имплементация на низ с управление на паметта.
+// РљР»Р°СЃСЉС‚ MyString РїСЂРµРґСЃС‚Р°РІР»СЏРІР° СЃРѕР±СЃС‚РІРµРЅР° РёРјРїР»РµРјРµРЅС‚Р°С†РёСЏ РЅР° РЅРёР· СЃ СѓРїСЂР°РІР»РµРЅРёРµ РЅР° РїР°РјРµС‚С‚Р°.
 class MyString
 {
 private:
@@ -9,7 +9,7 @@ private:
     size_t _size;
     size_t _allocatedDataSize;
 
-    // Конструктор, който създава MyString с предварително зададена дължина.
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РєРѕР№С‚Рѕ СЃСЉР·РґР°РІР° MyString СЃ РїСЂРµРґРІР°СЂРёС‚РµР»РЅРѕ Р·Р°РґР°РґРµРЅР° РґСЉР»Р¶РёРЅР°.
     explicit MyString(size_t stringLength);
 
     void resize(unsigned newAllocatedDataSize);

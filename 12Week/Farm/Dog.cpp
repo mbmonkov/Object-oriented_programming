@@ -8,10 +8,10 @@ void Dog::makeNoise() const
 
 AnimalType Dog::getType() const
 {
-    return AnimalType::Dog;  // Връща типа на животното като Dog
+    return AnimalType::Dog;  // Р’СЂСЉС‰Р° С‚РёРїР° РЅР° Р¶РёРІРѕС‚РЅРѕС‚Рѕ РєР°С‚Рѕ Dog
 }
 
 Animal* Dog::clone() const
 {
-    return new Dog(*this);  // Създава и връща нов обект от тип Dog, който е клонинг на текущия обект
+    return new Dog(*this);  // РЎСЉР·РґР°РІР° Рё РІСЂСЉС‰Р° РЅРѕРІ РѕР±РµРєС‚ РѕС‚ С‚РёРї Dog, РєРѕР№С‚Рѕ Рµ РєР»РѕРЅРёРЅРі РЅР° С‚РµРєСѓС‰РёСЏ РѕР±РµРєС‚
 }

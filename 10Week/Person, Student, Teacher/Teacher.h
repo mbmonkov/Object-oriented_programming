@@ -3,11 +3,11 @@
 
 class Teacher : public Person
 {
-    char** subjects;        // Динамичен масив от указатели към низове 
-    size_t subjectsCount;   // Броят на темите
+    char** subjects;        // Р”РёРЅР°РјРёС‡РµРЅ РјР°СЃРёРІ РѕС‚ СѓРєР°Р·Р°С‚РµР»Рё РєСЉРј РЅРёР·РѕРІРµ 
+    size_t subjectsCount;   // Р‘СЂРѕСЏС‚ РЅР° С‚РµРјРёС‚Рµ
 
     void free();
-    void copyFrom(const Teacher& other);// само нещата, които са от Teacher
+    void copyFrom(const Teacher& other);// СЃР°РјРѕ РЅРµС‰Р°С‚Р°, РєРѕРёС‚Рѕ СЃР° РѕС‚ Teacher
     void moveFrom(Teacher&& other);
 
 public:

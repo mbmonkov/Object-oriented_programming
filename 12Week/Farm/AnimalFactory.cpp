@@ -5,24 +5,24 @@
 #include "Dog.h"  
 #include "Cow.h" 
 
-// Статичен метод на AnimalFactory за създаване на ново животно въз основа на AnimalType
+// РЎС‚Р°С‚РёС‡РµРЅ РјРµС‚РѕРґ РЅР° AnimalFactory Р·Р° СЃСЉР·РґР°РІР°РЅРµ РЅР° РЅРѕРІРѕ Р¶РёРІРѕС‚РЅРѕ РІСЉР· РѕСЃРЅРѕРІР° РЅР° AnimalType
 Animal* AnimalFactory::create(AnimalType type)
 {
-	Animal* toReturn = nullptr;  // Инициализира указател към Animal с nullptr
-	switch (type)  // Проверява типа на животното
+	Animal* toReturn = nullptr;  // РРЅРёС†РёР°Р»РёР·РёСЂР° СѓРєР°Р·Р°С‚РµР» РєСЉРј Animal СЃ nullptr
+	switch (type)  // РџСЂРѕРІРµСЂСЏРІР° С‚РёРїР° РЅР° Р¶РёРІРѕС‚РЅРѕС‚Рѕ
 	{
-	case AnimalType::Cat:  // Ако типът е Cat
-		toReturn = new Cat;  // Създава нов обект от тип Cat
+	case AnimalType::Cat:  // РђРєРѕ С‚РёРїСЉС‚ Рµ Cat
+		toReturn = new Cat;  // РЎСЉР·РґР°РІР° РЅРѕРІ РѕР±РµРєС‚ РѕС‚ С‚РёРї Cat
 		break;
-	case AnimalType::Dog:  // Ако типът е Dog
-		toReturn = new Dog;  // Създава нов обект от тип Dog
+	case AnimalType::Dog:  // РђРєРѕ С‚РёРїСЉС‚ Рµ Dog
+		toReturn = new Dog;  // РЎСЉР·РґР°РІР° РЅРѕРІ РѕР±РµРєС‚ РѕС‚ С‚РёРї Dog
 		break;
-	case AnimalType::Cow:  // Ако типът е Cow
-		toReturn = new Cow;  // Създава нов обект от тип Cow
+	case AnimalType::Cow:  // РђРєРѕ С‚РёРїСЉС‚ Рµ Cow
+		toReturn = new Cow;  // РЎСЉР·РґР°РІР° РЅРѕРІ РѕР±РµРєС‚ РѕС‚ С‚РёРї Cow
 		break;
-	default:  // Ако типът не е валиден
-		throw std::invalid_argument("[Farm::addAnimal] - invalid type");  // Хвърля изключение с подходящо съобщение
+	default:  // РђРєРѕ С‚РёРїСЉС‚ РЅРµ Рµ РІР°Р»РёРґРµРЅ
+		throw std::invalid_argument("[Farm::addAnimal] - invalid type");  // РҐРІСЉСЂР»СЏ РёР·РєР»СЋС‡РµРЅРёРµ СЃ РїРѕРґС…РѕРґСЏС‰Рѕ СЃСЉРѕР±С‰РµРЅРёРµ
 		break;
 	}
-	return toReturn;  // Връща указателя към новосъздадения обект
+	return toReturn;  // Р’СЂСЉС‰Р° СѓРєР°Р·Р°С‚РµР»СЏ РєСЉРј РЅРѕРІРѕСЃСЉР·РґР°РґРµРЅРёСЏ РѕР±РµРєС‚
 }
