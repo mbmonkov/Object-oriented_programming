@@ -2,13 +2,13 @@
 #include <iostream>
 #include <stdexcept>
 
-// Структура, която управлява броячите на shared and weak указатели.
+// РЎС‚СЂСѓРєС‚СѓСЂР°, РєРѕСЏС‚Рѕ СѓРїСЂР°РІР»СЏРІР° Р±СЂРѕСЏС‡РёС‚Рµ РЅР° shared and weak СѓРєР°Р·Р°С‚РµР»Рё.
 struct Counter
 {
-    unsigned useCount = 0; // Брояч на споделените указатели.
-    unsigned weakCount = 0; // Брояч на слабите указатели.
+    unsigned useCount = 0; // Р‘СЂРѕСЏС‡ РЅР° СЃРїРѕРґРµР»РµРЅРёС‚Рµ СѓРєР°Р·Р°С‚РµР»Рё.
+    unsigned weakCount = 0; // Р‘СЂРѕСЏС‡ РЅР° СЃР»Р°Р±РёС‚Рµ СѓРєР°Р·Р°С‚РµР»Рё.
 
-    // Намалява броя на shared указатели и евентуално weak указатели.
+    // РќР°РјР°Р»СЏРІР° Р±СЂРѕСЏ РЅР° shared СѓРєР°Р·Р°С‚РµР»Рё Рё РµРІРµРЅС‚СѓР°Р»РЅРѕ weak СѓРєР°Р·Р°С‚РµР»Рё.
     void removeSharedPtr()
     {
         useCount--;
@@ -16,13 +16,13 @@ struct Counter
             weakCount--;
     }
 
-    // Намалява броя на weak указатели.
+    // РќР°РјР°Р»СЏРІР° Р±СЂРѕСЏ РЅР° weak СѓРєР°Р·Р°С‚РµР»Рё.
     void removeWeakPtr()
     {
         weakCount--;
     }
 
-    // Увеличава броя на shared указатели и евентуално weak указатели.
+    // РЈРІРµР»РёС‡Р°РІР° Р±СЂРѕСЏ РЅР° shared СѓРєР°Р·Р°С‚РµР»Рё Рё РµРІРµРЅС‚СѓР°Р»РЅРѕ weak СѓРєР°Р·Р°С‚РµР»Рё.
     void addSharedPtr()
     {
         useCount++;
@@ -30,47 +30,47 @@ struct Counter
             weakCount++;
     }
 
-    // Увеличава броя на weak указатели.
+    // РЈРІРµР»РёС‡Р°РІР° Р±СЂРѕСЏ РЅР° weak СѓРєР°Р·Р°С‚РµР»Рё.
     void addWeakPtr()
     {
         weakCount++;
     }
 };
 
-// Декларация на шаблонния клас WeakPtr, който ще взаимодейства със SharedPtr.
+// Р”РµРєР»Р°СЂР°С†РёСЏ РЅР° С€Р°Р±Р»РѕРЅРЅРёСЏ РєР»Р°СЃ WeakPtr, РєРѕР№С‚Рѕ С‰Рµ РІР·Р°РёРјРѕРґРµР№СЃС‚РІР° СЃСЉСЃ SharedPtr.
 template <class V>
 class WeakPtr;
 
 template <typename T>
 class SharedPtr
 {
-    // Декларация на шаблонния клас WeakPtr, който има достъп до частните членове на SharedPtr.
+    // Р”РµРєР»Р°СЂР°С†РёСЏ РЅР° С€Р°Р±Р»РѕРЅРЅРёСЏ РєР»Р°СЃ WeakPtr, РєРѕР№С‚Рѕ РёРјР° РґРѕСЃС‚СЉРї РґРѕ С‡Р°СЃС‚РЅРёС‚Рµ С‡Р»РµРЅРѕРІРµ РЅР° SharedPtr.
     template <typename V> friend class WeakPtr;
 
-    T* data; // Указател към управлявания обект.
-    Counter* counter; // Указател към структурата за броене на указатели.
+    T* data; // РЈРєР°Р·Р°С‚РµР» РєСЉРј СѓРїСЂР°РІР»СЏРІР°РЅРёСЏ РѕР±РµРєС‚.
+    Counter* counter; // РЈРєР°Р·Р°С‚РµР» РєСЉРј СЃС‚СЂСѓРєС‚СѓСЂР°С‚Р° Р·Р° Р±СЂРѕРµРЅРµ РЅР° СѓРєР°Р·Р°С‚РµР»Рё.
 
     void free(); 
     void copyFrom(const SharedPtr<T>& other); 
     void moveFrom(SharedPtr<T>&& other); 
-    SharedPtr(WeakPtr<T>& ptr); // Конструктор, който създава SharedPtr от WeakPtr.
+    SharedPtr(WeakPtr<T>& ptr); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РєРѕР№С‚Рѕ СЃСЉР·РґР°РІР° SharedPtr РѕС‚ WeakPtr.
 
 public:
-    SharedPtr(); // Конструктор по подразбиране.
-    SharedPtr(T* data); // Конструктор, който инициализира SharedPtr с указател към данни.
+    SharedPtr(); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ РїРѕРґСЂР°Р·Р±РёСЂР°РЅРµ.
+    SharedPtr(T* data); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РєРѕР№С‚Рѕ РёРЅРёС†РёР°Р»РёР·РёСЂР° SharedPtr СЃ СѓРєР°Р·Р°С‚РµР» РєСЉРј РґР°РЅРЅРё.
 
-    SharedPtr(const SharedPtr<T>& other); // Конструктор за копиране.
-    SharedPtr& operator=(const SharedPtr<T>& other); // Оператор за присвояване на SharedPtr.
+    SharedPtr(const SharedPtr<T>& other); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° РєРѕРїРёСЂР°РЅРµ.
+    SharedPtr& operator=(const SharedPtr<T>& other); // РћРїРµСЂР°С‚РѕСЂ Р·Р° РїСЂРёСЃРІРѕСЏРІР°РЅРµ РЅР° SharedPtr.
 
-    SharedPtr(SharedPtr<T>&& other); // Конструктор за преместване.
-    SharedPtr& operator=(SharedPtr<T>&& other); // Оператор за присвояване чрез преместване.
+    SharedPtr(SharedPtr<T>&& other); // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° РїСЂРµРјРµСЃС‚РІР°РЅРµ.
+    SharedPtr& operator=(SharedPtr<T>&& other); // РћРїРµСЂР°С‚РѕСЂ Р·Р° РїСЂРёСЃРІРѕСЏРІР°РЅРµ С‡СЂРµР· РїСЂРµРјРµСЃС‚РІР°РЅРµ.
 
-    const T& operator*() const; // Константен оператор за dereference.
-    T& operator*(); // Оператор за dereference.
-    const T* operator->() const; // Константен оператор за достъп до члена на обекта.
-    T* operator->(); // Оператор за достъп до члена на обекта.
+    const T& operator*() const; // РљРѕРЅСЃС‚Р°РЅС‚РµРЅ РѕРїРµСЂР°С‚РѕСЂ Р·Р° dereference.
+    T& operator*(); // РћРїРµСЂР°С‚РѕСЂ Р·Р° dereference.
+    const T* operator->() const; // РљРѕРЅСЃС‚Р°РЅС‚РµРЅ РѕРїРµСЂР°С‚РѕСЂ Р·Р° РґРѕСЃС‚СЉРї РґРѕ С‡Р»РµРЅР° РЅР° РѕР±РµРєС‚Р°.
+    T* operator->(); // РћРїРµСЂР°С‚РѕСЂ Р·Р° РґРѕСЃС‚СЉРї РґРѕ С‡Р»РµРЅР° РЅР° РѕР±РµРєС‚Р°.
 
-    bool isInitlized() const; // Проверява дали указателят е инициализиран.
+    bool isInitlized() const; // РџСЂРѕРІРµСЂСЏРІР° РґР°Р»Рё СѓРєР°Р·Р°С‚РµР»СЏС‚ Рµ РёРЅРёС†РёР°Р»РёР·РёСЂР°РЅ.
 
     ~SharedPtr(); 
 };
@@ -82,7 +82,7 @@ inline SharedPtr<T>::SharedPtr(WeakPtr<T>& ptr)
     counter = ptr.counter;
     if (counter)
     {
-        counter->addSharedPtr(); // Увеличаване на броя на shared указатели.
+        counter->addSharedPtr(); // РЈРІРµР»РёС‡Р°РІР°РЅРµ РЅР° Р±СЂРѕСЏ РЅР° shared СѓРєР°Р·Р°С‚РµР»Рё.
     }
 }
 
@@ -92,13 +92,13 @@ void SharedPtr<T>::free()
     if (data == nullptr && counter == nullptr)
         return;
 
-    counter->removeSharedPtr(); // Намаляване на броя на shared указатели.
+    counter->removeSharedPtr(); // РќР°РјР°Р»СЏРІР°РЅРµ РЅР° Р±СЂРѕСЏ РЅР° shared СѓРєР°Р·Р°С‚РµР»Рё.
 
     if (counter->useCount == 0)
-        delete data; // Изтриване на данните, ако няма shared указатели.
+        delete data; // РР·С‚СЂРёРІР°РЅРµ РЅР° РґР°РЅРЅРёС‚Рµ, Р°РєРѕ РЅСЏРјР° shared СѓРєР°Р·Р°С‚РµР»Рё.
 
     if (counter->weakCount == 0)
-        delete counter; // Изтриване на броячите, ако няма weak указатели.
+        delete counter; // РР·С‚СЂРёРІР°РЅРµ РЅР° Р±СЂРѕСЏС‡РёС‚Рµ, Р°РєРѕ РЅСЏРјР° weak СѓРєР°Р·Р°С‚РµР»Рё.
 }
 
 template <typename T>
@@ -107,7 +107,7 @@ void SharedPtr<T>::copyFrom(const SharedPtr<T>& other)
     data = other.data;
     counter = other.counter;
     if (counter)
-        counter->addSharedPtr(); // Увеличаване на броя на shared указатели.
+        counter->addSharedPtr(); // РЈРІРµР»РёС‡Р°РІР°РЅРµ РЅР° Р±СЂРѕСЏ РЅР° shared СѓРєР°Р·Р°С‚РµР»Рё.
 }
 
 template <typename T>
@@ -123,8 +123,8 @@ SharedPtr<T>::SharedPtr(T* data)
     this->data = data; 
     if (this->data)
     {
-        counter = new Counter(); // Създаване на нови броячи.
-        counter->addSharedPtr(); // Увеличаване на броя на shared указатели.
+        counter = new Counter(); // РЎСЉР·РґР°РІР°РЅРµ РЅР° РЅРѕРІРё Р±СЂРѕСЏС‡Рё.
+        counter->addSharedPtr(); // РЈРІРµР»РёС‡Р°РІР°РЅРµ РЅР° Р±СЂРѕСЏ РЅР° shared СѓРєР°Р·Р°С‚РµР»Рё.
     }
 }
 
@@ -179,7 +179,7 @@ const T& SharedPtr<T>::operator*() const
     {
         throw std::runtime_error("Pointer not set"); 
     }
-    return *data; // Връща стойността на обекта.
+    return *data; // Р’СЂСЉС‰Р° СЃС‚РѕР№РЅРѕСЃС‚С‚Р° РЅР° РѕР±РµРєС‚Р°.
 }
 
 template <typename T>
@@ -189,7 +189,7 @@ T& SharedPtr<T>::operator*()
     {
         throw std::runtime_error("Pointer not set"); 
     }
-    return *data; // Връща стойността на обекта.
+    return *data; // Р’СЂСЉС‰Р° СЃС‚РѕР№РЅРѕСЃС‚С‚Р° РЅР° РѕР±РµРєС‚Р°.
 }
 
 template <typename T>
@@ -200,16 +200,16 @@ SharedPtr<T>::~SharedPtr()
 
 template<typename T>
 T* SharedPtr<T>::operator->() {
-    return data; // Връща указателя към данните.
+    return data; // Р’СЂСЉС‰Р° СѓРєР°Р·Р°С‚РµР»СЏ РєСЉРј РґР°РЅРЅРёС‚Рµ.
 }
 
 template<typename T>
 const T* SharedPtr<T>::operator->() const {
-    return data; // Връща указателя към данните (константен).
+    return data; // Р’СЂСЉС‰Р° СѓРєР°Р·Р°С‚РµР»СЏ РєСЉРј РґР°РЅРЅРёС‚Рµ (РєРѕРЅСЃС‚Р°РЅС‚РµРЅ).
 }
 
 template<typename T>
 bool SharedPtr<T>::isInitlized() const
 {
-    return data != nullptr; // Проверява дали указателят е инициализиран.
+    return data != nullptr; // РџСЂРѕРІРµСЂСЏРІР° РґР°Р»Рё СѓРєР°Р·Р°С‚РµР»СЏС‚ Рµ РёРЅРёС†РёР°Р»РёР·РёСЂР°РЅ.
 }
