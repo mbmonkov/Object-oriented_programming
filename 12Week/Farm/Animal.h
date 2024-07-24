@@ -1,6 +1,6 @@
 #pragma once 
 
-// Декларира enum клас AnimalType с три стойности: Cat, Dog и Cow
+// Р”РµРєР»Р°СЂРёСЂР° enum РєР»Р°СЃ AnimalType СЃ С‚СЂРё СЃС‚РѕР№РЅРѕСЃС‚Рё: Cat, Dog Рё Cow
 enum class AnimalType
 {
 	Cat,  
@@ -8,19 +8,19 @@ enum class AnimalType
 	Cow  
 };
 
-// Абстрактен клас Animal
+// РђР±СЃС‚СЂР°РєС‚РµРЅ РєР»Р°СЃ Animal
 class Animal
 {
 public:
-	// Чисто виртуален метод
+	// Р§РёСЃС‚Рѕ РІРёСЂС‚СѓР°Р»РµРЅ РјРµС‚РѕРґ
 	virtual void makeNoise() const = 0;
 
-	// Виртуален деструктор
+	// Р’РёСЂС‚СѓР°Р»РµРЅ РґРµСЃС‚СЂСѓРєС‚РѕСЂ
 	virtual ~Animal() = default;
 
-	// Чисто виртуален метод
+	// Р§РёСЃС‚Рѕ РІРёСЂС‚СѓР°Р»РµРЅ РјРµС‚РѕРґ
 	virtual AnimalType getType() const = 0;
 
-	// Чисто виртуален метод
+	// Р§РёСЃС‚Рѕ РІРёСЂС‚СѓР°Р»РµРЅ РјРµС‚РѕРґ
 	virtual Animal* clone() const = 0;
 };
