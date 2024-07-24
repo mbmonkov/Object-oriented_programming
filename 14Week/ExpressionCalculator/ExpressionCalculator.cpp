@@ -3,25 +3,25 @@
 #include "String and StringView/MyString.h" 
 #include "String and StringView/StringView.h" 
 
-// Клас, който представлява интерпретация на булеви стойности за променливи от 'a' до 'z'
+// РљР»Р°СЃ, РєРѕР№С‚Рѕ РїСЂРµРґСЃС‚Р°РІР»СЏРІР° РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ РЅР° Р±СѓР»РµРІРё СЃС‚РѕР№РЅРѕСЃС‚Рё Р·Р° РїСЂРѕРјРµРЅР»РёРІРё РѕС‚ 'a' РґРѕ 'z'
 class BooleanInterpretation
 {
 public:
-    // Задава стойност на булева променлива, представена от символа 'ch'
+    // Р—Р°РґР°РІР° СЃС‚РѕР№РЅРѕСЃС‚ РЅР° Р±СѓР»РµРІР° РїСЂРѕРјРµРЅР»РёРІР°, РїСЂРµРґСЃС‚Р°РІРµРЅР° РѕС‚ СЃРёРјРІРѕР»Р° 'ch'
     void set(char ch, bool value)
     {
         assert(ch >= 'a' && ch <= 'z'); 
         values[ch - 'a'] = value;
     }
 
-    // Връща стойността на булева променлива, представена от символа 'ch'
+    // Р’СЂСЉС‰Р° СЃС‚РѕР№РЅРѕСЃС‚С‚Р° РЅР° Р±СѓР»РµРІР° РїСЂРѕРјРµРЅР»РёРІР°, РїСЂРµРґСЃС‚Р°РІРµРЅР° РѕС‚ СЃРёРјРІРѕР»Р° 'ch'
     bool operator()(char ch) const
     {
         assert(ch >= 'a' && ch <= 'z');
         return values[ch - 'a'];
     }
 
-    // Връща броя на булевите променливи, които са зададени на true
+    // Р’СЂСЉС‰Р° Р±СЂРѕСЏ РЅР° Р±СѓР»РµРІРёС‚Рµ РїСЂРѕРјРµРЅР»РёРІРё, РєРѕРёС‚Рѕ СЃР° Р·Р°РґР°РґРµРЅРё РЅР° true
     size_t getTrueCount() const
     {
         size_t count = 0;
@@ -33,45 +33,45 @@ public:
         return count;
     }
 
-    // Изключва стойности от маската (чрез нулиране на булевите променливи, в зависимост от стойността на маската)
+    // РР·РєР»СЋС‡РІР° СЃС‚РѕР№РЅРѕСЃС‚Рё РѕС‚ РјР°СЃРєР°С‚Р° (С‡СЂРµР· РЅСѓР»РёСЂР°РЅРµ РЅР° Р±СѓР»РµРІРёС‚Рµ РїСЂРѕРјРµРЅР»РёРІРё, РІ Р·Р°РІРёСЃРёРјРѕСЃС‚ РѕС‚ СЃС‚РѕР№РЅРѕСЃС‚С‚Р° РЅР° РјР°СЃРєР°С‚Р°)
     void excludeValuesByMask(unsigned mask)
     {
         for (int i = 25; i >= 0; i--)
         {
             if (values[i])
             {
-                if (mask % 2 == 0) // последният бит е 0
+                if (mask % 2 == 0) // РїРѕСЃР»РµРґРЅРёСЏС‚ Р±РёС‚ Рµ 0
                     values[i] = false;
-                mask /= 2; // премахва последния бит
+                mask /= 2; // РїСЂРµРјР°С…РІР° РїРѕСЃР»РµРґРЅРёСЏ Р±РёС‚
             }
         }
     }
 private:
-    bool values[26]{ false }; // Масив за съхранение на булевите стойности за променливи от 'a' до 'z'
+    bool values[26]{ false }; // РњР°СЃРёРІ Р·Р° СЃСЉС…СЂР°РЅРµРЅРёРµ РЅР° Р±СѓР»РµРІРёС‚Рµ СЃС‚РѕР№РЅРѕСЃС‚Рё Р·Р° РїСЂРѕРјРµРЅР»РёРІРё РѕС‚ 'a' РґРѕ 'z'
 };
 
-// Абстрактен базов клас за булеви изрази
+// РђР±СЃС‚СЂР°РєС‚РµРЅ Р±Р°Р·РѕРІ РєР»Р°СЃ Р·Р° Р±СѓР»РµРІРё РёР·СЂР°Р·Рё
 struct BooleanExpression
 {
-    BooleanExpression() = default; // Конструктор по подразбиране
-    BooleanExpression(const BooleanExpression&) = delete; // Забранява копирането
-    BooleanExpression& operator=(const BooleanExpression&) = delete; // Забранява оператор за копиране
+    BooleanExpression() = default; // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ РїРѕРґСЂР°Р·Р±РёСЂР°РЅРµ
+    BooleanExpression(const BooleanExpression&) = delete; // Р—Р°Р±СЂР°РЅСЏРІР° РєРѕРїРёСЂР°РЅРµС‚Рѕ
+    BooleanExpression& operator=(const BooleanExpression&) = delete; // Р—Р°Р±СЂР°РЅСЏРІР° РѕРїРµСЂР°С‚РѕСЂ Р·Р° РєРѕРїРёСЂР°РЅРµ
 
-    virtual bool eval(const BooleanInterpretation& interpet) const = 0; // Чиста виртуална функция за оценка на израза
-    virtual ~BooleanExpression() = default; // Деструктор по подразбиране
-    virtual BooleanExpression* clone() const = 0; // Чиста виртуална функция за клониране на израза
+    virtual bool eval(const BooleanInterpretation& interpet) const = 0; // Р§РёСЃС‚Р° РІРёСЂС‚СѓР°Р»РЅР° С„СѓРЅРєС†РёСЏ Р·Р° РѕС†РµРЅРєР° РЅР° РёР·СЂР°Р·Р°
+    virtual ~BooleanExpression() = default; // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ РїРѕРґСЂР°Р·Р±РёСЂР°РЅРµ
+    virtual BooleanExpression* clone() const = 0; // Р§РёСЃС‚Р° РІРёСЂС‚СѓР°Р»РЅР° С„СѓРЅРєС†РёСЏ Р·Р° РєР»РѕРЅРёСЂР°РЅРµ РЅР° РёР·СЂР°Р·Р°
 
-    virtual void populateVariables(BooleanInterpretation& interpret) const = 0; // Чиста виртуална функция за попълване на променливи
+    virtual void populateVariables(BooleanInterpretation& interpret) const = 0; // Р§РёСЃС‚Р° РІРёСЂС‚СѓР°Р»РЅР° С„СѓРЅРєС†РёСЏ Р·Р° РїРѕРїСЉР»РІР°РЅРµ РЅР° РїСЂРѕРјРµРЅР»РёРІРё
 };
 
-// Представлява булева променлива
+// РџСЂРµРґСЃС‚Р°РІР»СЏРІР° Р±СѓР»РµРІР° РїСЂРѕРјРµРЅР»РёРІР°
 struct Var : BooleanExpression
 {
 private:
     char ch;
 
 public:
-    Var(char ch) : ch(ch) {} // Конструктор
+    Var(char ch) : ch(ch) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
     bool eval(const BooleanInterpretation& interpet) const override 
     {
@@ -89,10 +89,10 @@ public:
     }
 };
 
-// Абстрактен клас за унарни операции върху булеви изрази
+// РђР±СЃС‚СЂР°РєС‚РµРЅ РєР»Р°СЃ Р·Р° СѓРЅР°СЂРЅРё РѕРїРµСЂР°С†РёРё РІСЉСЂС…Сѓ Р±СѓР»РµРІРё РёР·СЂР°Р·Рё
 struct UnaryOperation : BooleanExpression
 {
-    UnaryOperation(BooleanExpression* expr) : expr(expr) {} // Конструктор
+    UnaryOperation(BooleanExpression* expr) : expr(expr) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
     void populateVariables(BooleanInterpretation& interpret) const override
     {
@@ -104,13 +104,13 @@ struct UnaryOperation : BooleanExpression
         delete expr;
     }
 protected:
-    BooleanExpression* expr; // "подизраз" на операцията
+    BooleanExpression* expr; // "РїРѕРґРёР·СЂР°Р·" РЅР° РѕРїРµСЂР°С†РёСЏС‚Р°
 };
 
-// Представлява логическо отрицание (NOT)
+// РџСЂРµРґСЃС‚Р°РІР»СЏРІР° Р»РѕРіРёС‡РµСЃРєРѕ РѕС‚СЂРёС†Р°РЅРёРµ (NOT)
 struct Negation : UnaryOperation
 {
-    Negation(BooleanExpression* expr) : UnaryOperation(expr) {} // Конструктор
+    Negation(BooleanExpression* expr) : UnaryOperation(expr) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
     virtual BooleanExpression* clone() const override
     {
@@ -123,10 +123,10 @@ struct Negation : UnaryOperation
     }
 };
 
-// Абстрактен клас за бинарни операции върху булеви изрази
+// РђР±СЃС‚СЂР°РєС‚РµРЅ РєР»Р°СЃ Р·Р° Р±РёРЅР°СЂРЅРё РѕРїРµСЂР°С†РёРё РІСЉСЂС…Сѓ Р±СѓР»РµРІРё РёР·СЂР°Р·Рё
 struct BinaryOperation : BooleanExpression
 {
-    BinaryOperation(BooleanExpression* left, BooleanExpression* right) : left(left), right(right) {} // Конструктор
+    BinaryOperation(BooleanExpression* left, BooleanExpression* right) : left(left), right(right) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
     void populateVariables(BooleanInterpretation& interpret) const override 
     {
@@ -140,14 +140,14 @@ struct BinaryOperation : BooleanExpression
         delete right;
     }
 protected:
-    BooleanExpression* left; // Ляв "подизраз"
-    BooleanExpression* right; // Десен "подизраз"
+    BooleanExpression* left; // Р›СЏРІ "РїРѕРґРёР·СЂР°Р·"
+    BooleanExpression* right; // Р”РµСЃРµРЅ "РїРѕРґРёР·СЂР°Р·"
 };
 
-// Представлява логическа конюнкция (AND)
+// РџСЂРµРґСЃС‚Р°РІР»СЏРІР° Р»РѕРіРёС‡РµСЃРєР° РєРѕРЅСЋРЅРєС†РёСЏ (AND)
 struct Conjunction : BinaryOperation
 {
-    Conjunction(BooleanExpression* left, BooleanExpression* right) : BinaryOperation(left, right) {} // Конструктор
+    Conjunction(BooleanExpression* left, BooleanExpression* right) : BinaryOperation(left, right) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
     virtual BooleanExpression* clone() const override
     {
@@ -160,10 +160,10 @@ struct Conjunction : BinaryOperation
     }
 };
 
-// Представлява логическа дизюнкция (OR)
+// РџСЂРµРґСЃС‚Р°РІР»СЏРІР° Р»РѕРіРёС‡РµСЃРєР° РґРёР·СЋРЅРєС†РёСЏ (OR)
 struct Disjunction : BinaryOperation
 {
-    Disjunction(BooleanExpression* left, BooleanExpression* right) : BinaryOperation(left, right) {} // Конструктор
+    Disjunction(BooleanExpression* left, BooleanExpression* right) : BinaryOperation(left, right) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
     virtual BooleanExpression* clone() const override 
     {
@@ -176,10 +176,10 @@ struct Disjunction : BinaryOperation
     }
 };
 
-// Представлява импликация (IMPLIES)
+// РџСЂРµРґСЃС‚Р°РІР»СЏРІР° РёРјРїР»РёРєР°С†РёСЏ (IMPLIES)
 struct Implies : BinaryOperation
 {
-    Implies(BooleanExpression* left, BooleanExpression* right) : BinaryOperation(left, right) {} // Конструктор
+    Implies(BooleanExpression* left, BooleanExpression* right) : BinaryOperation(left, right) {} // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 
     BooleanExpression* clone() const override 
     {
@@ -192,13 +192,13 @@ struct Implies : BinaryOperation
     }
 };
 
-// Функция за създаване на булеви изрази от низ
+// Р¤СѓРЅРєС†РёСЏ Р·Р° СЃСЉР·РґР°РІР°РЅРµ РЅР° Р±СѓР»РµРІРё РёР·СЂР°Р·Рё РѕС‚ РЅРёР·
 BooleanExpression* expressionFactory(StringView str)
 {
-    str = str.substr(1, str.length() - 2); // Премахва първата и последната скоба
+    str = str.substr(1, str.length() - 2); // РџСЂРµРјР°С…РІР° РїСЉСЂРІР°С‚Р° Рё РїРѕСЃР»РµРґРЅР°С‚Р° СЃРєРѕР±Р°
 
     if (str.length() == 1)
-        return new Var(str[0]); // Ако дължината на низа е 1, създава променлива
+        return new Var(str[0]); // РђРєРѕ РґСЉР»Р¶РёРЅР°С‚Р° РЅР° РЅРёР·Р° Рµ 1, СЃСЉР·РґР°РІР° РїСЂРѕРјРµРЅР»РёРІР°
 
     unsigned count = 0;
     for (int i = 0; i < str.length(); i++)
@@ -218,68 +218,68 @@ BooleanExpression* expressionFactory(StringView str)
             }
         }
     }
-    throw std::invalid_argument("Invalid expression!"); // Хвърля изключение, ако изразът е невалиден
+    throw std::invalid_argument("Invalid expression!"); // РҐРІСЉСЂР»СЏ РёР·РєР»СЋС‡РµРЅРёРµ, Р°РєРѕ РёР·СЂР°Р·СЉС‚ Рµ РЅРµРІР°Р»РёРґРµРЅ
 }
 
-// Клас, който управлява булевите изрази
+// РљР»Р°СЃ, РєРѕР№С‚Рѕ СѓРїСЂР°РІР»СЏРІР° Р±СѓР»РµРІРёС‚Рµ РёР·СЂР°Р·Рё
 class BooleanExpressionHandler
 {
 private:
 
-    // Проверява всички възможни присвоявания на булеви стойности, за да види дали изразът е тавтология или противоречие
+    // РџСЂРѕРІРµСЂСЏРІР° РІСЃРёС‡РєРё РІСЉР·РјРѕР¶РЅРё РїСЂРёСЃРІРѕСЏРІР°РЅРёСЏ РЅР° Р±СѓР»РµРІРё СЃС‚РѕР№РЅРѕСЃС‚Рё, Р·Р° РґР° РІРёРґРё РґР°Р»Рё РёР·СЂР°Р·СЉС‚ Рµ С‚Р°РІС‚РѕР»РѕРіРёСЏ РёР»Рё РїСЂРѕС‚РёРІРѕСЂРµС‡РёРµ
     bool checkAllTruthAssignments(bool value) const
     {
-        size_t varsCount = myVariables.getTrueCount(); // Брои колко променливи са зададени на true
-        size_t powerOfTwo = 1 << varsCount; // Определя броя на възможните комбинации от булеви стойности
+        size_t varsCount = myVariables.getTrueCount(); // Р‘СЂРѕРё РєРѕР»РєРѕ РїСЂРѕРјРµРЅР»РёРІРё СЃР° Р·Р°РґР°РґРµРЅРё РЅР° true
+        size_t powerOfTwo = 1 << varsCount; // РћРїСЂРµРґРµР»СЏ Р±СЂРѕСЏ РЅР° РІСЉР·РјРѕР¶РЅРёС‚Рµ РєРѕРјР±РёРЅР°С†РёРё РѕС‚ Р±СѓР»РµРІРё СЃС‚РѕР№РЅРѕСЃС‚Рё
         for (int i = 0; i < powerOfTwo; i++)
         {
-            BooleanInterpretation current = myVariables; // Създава копие на интерпретацията на променливите
-            current.excludeValuesByMask(i); // Изключва стойности в зависимост от маската
-            if (expr->eval(current) != value) // Проверява дали текущото оценяване е различно от очакваното
+            BooleanInterpretation current = myVariables; // РЎСЉР·РґР°РІР° РєРѕРїРёРµ РЅР° РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏС‚Р° РЅР° РїСЂРѕРјРµРЅР»РёРІРёС‚Рµ
+            current.excludeValuesByMask(i); // РР·РєР»СЋС‡РІР° СЃС‚РѕР№РЅРѕСЃС‚Рё РІ Р·Р°РІРёСЃРёРјРѕСЃС‚ РѕС‚ РјР°СЃРєР°С‚Р°
+            if (expr->eval(current) != value) // РџСЂРѕРІРµСЂСЏРІР° РґР°Р»Рё С‚РµРєСѓС‰РѕС‚Рѕ РѕС†РµРЅСЏРІР°РЅРµ Рµ СЂР°Р·Р»РёС‡РЅРѕ РѕС‚ РѕС‡Р°РєРІР°РЅРѕС‚Рѕ
                 return false;
         }
         return true;
     }
 
-    // Освобождава ресурси
+    // РћСЃРІРѕР±РѕР¶РґР°РІР° СЂРµСЃСѓСЂСЃРё
     void free()
     {
         delete expr;
     }
 
-    // Копира данни от друг обект
+    // РљРѕРїРёСЂР° РґР°РЅРЅРё РѕС‚ РґСЂСѓРі РѕР±РµРєС‚
     void copyFrom(const BooleanExpressionHandler& other)
     {
-        expr = other.expr->clone(); // Клонира израза
-        myVariables = other.myVariables; // Копира променливите
+        expr = other.expr->clone(); // РљР»РѕРЅРёСЂР° РёР·СЂР°Р·Р°
+        myVariables = other.myVariables; // РљРѕРїРёСЂР° РїСЂРѕРјРµРЅР»РёРІРёС‚Рµ
     }
 
-    // Премества данни от друг обект
+    // РџСЂРµРјРµСЃС‚РІР° РґР°РЅРЅРё РѕС‚ РґСЂСѓРі РѕР±РµРєС‚
     void moveFrom(BooleanExpressionHandler&& other)
     {
-        expr = other.expr; // Прехвърля собствеността на израза
-        myVariables = std::move(other.myVariables); // Премества променливите
-        other.expr = nullptr; // Нулира израза в другия обект
+        expr = other.expr; // РџСЂРµС…РІСЉСЂР»СЏ СЃРѕР±СЃС‚РІРµРЅРѕСЃС‚С‚Р° РЅР° РёР·СЂР°Р·Р°
+        myVariables = std::move(other.myVariables); // РџСЂРµРјРµСЃС‚РІР° РїСЂРѕРјРµРЅР»РёРІРёС‚Рµ
+        other.expr = nullptr; // РќСѓР»РёСЂР° РёР·СЂР°Р·Р° РІ РґСЂСѓРіРёСЏ РѕР±РµРєС‚
     }
 
-    BooleanInterpretation myVariables; // Променливи за оценка на булевия израз
-    BooleanExpression* expr = nullptr; // Указател към текущия булев израз
+    BooleanInterpretation myVariables; // РџСЂРѕРјРµРЅР»РёРІРё Р·Р° РѕС†РµРЅРєР° РЅР° Р±СѓР»РµРІРёСЏ РёР·СЂР°Р·
+    BooleanExpression* expr = nullptr; // РЈРєР°Р·Р°С‚РµР» РєСЉРј С‚РµРєСѓС‰РёСЏ Р±СѓР»РµРІ РёР·СЂР°Р·
 
 public:
     BooleanExpressionHandler(const MyString& str)
     {
-        expr = expressionFactory(str); // Създава булев израз от низ
-        expr->populateVariables(myVariables); // Попълва променливите в интерпретацията
+        expr = expressionFactory(str); // РЎСЉР·РґР°РІР° Р±СѓР»РµРІ РёР·СЂР°Р· РѕС‚ РЅРёР·
+        expr->populateVariables(myVariables); // РџРѕРїСЉР»РІР° РїСЂРѕРјРµРЅР»РёРІРёС‚Рµ РІ РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏС‚Р°
     }
 
 
-       // Конструктор за копиране
+       // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° РєРѕРїРёСЂР°РЅРµ
     BooleanExpressionHandler(const BooleanExpressionHandler& other)
     {
         copyFrom(other);
     }
 
-    // Оператор за присвояване чрез копиране
+    // РћРїРµСЂР°С‚РѕСЂ Р·Р° РїСЂРёСЃРІРѕСЏРІР°РЅРµ С‡СЂРµР· РєРѕРїРёСЂР°РЅРµ
     BooleanExpressionHandler& operator=(const BooleanExpressionHandler& other)
     {
         if (this != &other)
@@ -290,13 +290,13 @@ public:
         return *this;
     }
 
-    // Конструктор за преместване
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р·Р° РїСЂРµРјРµСЃС‚РІР°РЅРµ
     BooleanExpressionHandler(BooleanExpressionHandler&& other) noexcept
     {
         moveFrom(std::move(other));
     }
 
-    // Оператор за присвояване чрез преместване
+    // РћРїРµСЂР°С‚РѕСЂ Р·Р° РїСЂРёСЃРІРѕСЏРІР°РЅРµ С‡СЂРµР· РїСЂРµРјРµСЃС‚РІР°РЅРµ
     BooleanExpressionHandler& operator=(BooleanExpressionHandler&& other) noexcept
     {
         if (this != &other)
@@ -307,25 +307,25 @@ public:
         return *this;
     }
 
-    // Деструктор
+    // Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
     ~BooleanExpressionHandler()
     {
         free();
     }
 
-    // Оценява булевия израз, използвайки дадената интерпретация
+    // РћС†РµРЅСЏРІР° Р±СѓР»РµРІРёСЏ РёР·СЂР°Р·, РёР·РїРѕР»Р·РІР°Р№РєРё РґР°РґРµРЅР°С‚Р° РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ
     bool evaluate(const BooleanInterpretation& bi) const
     {
         return expr->eval(bi);
     }
 
-    // Проверява дали изразът е тавтология (винаги истинен)
+    // РџСЂРѕРІРµСЂСЏРІР° РґР°Р»Рё РёР·СЂР°Р·СЉС‚ Рµ С‚Р°РІС‚РѕР»РѕРіРёСЏ (РІРёРЅР°РіРё РёСЃС‚РёРЅРµРЅ)
     bool isTautology() const
     {
         return checkAllTruthAssignments(true);
     }
 
-    // Проверява дали изразът е противоречие (винаги фалшив)
+    // РџСЂРѕРІРµСЂСЏРІР° РґР°Р»Рё РёР·СЂР°Р·СЉС‚ Рµ РїСЂРѕС‚РёРІРѕСЂРµС‡РёРµ (РІРёРЅР°РіРё С„Р°Р»С€РёРІ)
     bool isContradiction() const
     {
         return checkAllTruthAssignments(false);
@@ -335,11 +335,11 @@ public:
 
 int main()
 {
-    BooleanExpressionHandler be("((p)|((q)&(t)))"); // Създава булев израз от низ
-    BooleanInterpretation bi; // Създава интерпретация на булевите променливи
-    bi.set('p', true); // Задава променливата 'p' на true
-    std::cout << be.evaluate(bi) << std::endl; // Оценява и отпечатва резултата от израза
+    BooleanExpressionHandler be("((p)|((q)&(t)))"); // РЎСЉР·РґР°РІР° Р±СѓР»РµРІ РёР·СЂР°Р· РѕС‚ РЅРёР·
+    BooleanInterpretation bi; // РЎСЉР·РґР°РІР° РёРЅС‚РµСЂРїСЂРµС‚Р°С†РёСЏ РЅР° Р±СѓР»РµРІРёС‚Рµ РїСЂРѕРјРµРЅР»РёРІРё
+    bi.set('p', true); // Р—Р°РґР°РІР° РїСЂРѕРјРµРЅР»РёРІР°С‚Р° 'p' РЅР° true
+    std::cout << be.evaluate(bi) << std::endl; // РћС†РµРЅСЏРІР° Рё РѕС‚РїРµС‡Р°С‚РІР° СЂРµР·СѓР»С‚Р°С‚Р° РѕС‚ РёР·СЂР°Р·Р°
 
-    BooleanExpressionHandler be2("((p)|(!(p)))"); // Създава друг булев израз
-    std::cout << be2.isTautology() << std::endl; // Проверява и отпечатва дали изразът е тавтология
+    BooleanExpressionHandler be2("((p)|(!(p)))"); // РЎСЉР·РґР°РІР° РґСЂСѓРі Р±СѓР»РµРІ РёР·СЂР°Р·
+    std::cout << be2.isTautology() << std::endl; // РџСЂРѕРІРµСЂСЏРІР° Рё РѕС‚РїРµС‡Р°С‚РІР° РґР°Р»Рё РёР·СЂР°Р·СЉС‚ Рµ С‚Р°РІС‚РѕР»РѕРіРёСЏ
 }
