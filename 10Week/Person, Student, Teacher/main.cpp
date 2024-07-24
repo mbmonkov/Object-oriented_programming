@@ -5,22 +5,22 @@
 
 int main()
 {
-    // Дефинира и инициализира масив от низове (subjects)
+    // Р”РµС„РёРЅРёСЂР° Рё РёРЅРёС†РёР°Р»РёР·РёСЂР° РјР°СЃРёРІ РѕС‚ РЅРёР·РѕРІРµ (subjects)
     char subjects[3][20] = { "English", "Mathematics", "Physics" };
 
-    // Създава масив от указатели към тези низове
+    // РЎСЉР·РґР°РІР° РјР°СЃРёРІ РѕС‚ СѓРєР°Р·Р°С‚РµР»Рё РєСЉРј С‚РµР·Рё РЅРёР·РѕРІРµ
     char** subjectsPointers = new char* [3];
     subjectsPointers[0] = subjects[0];
     subjectsPointers[1] = subjects[1];
     subjectsPointers[2] = subjects[2];
 
-    // Създава обект от тип Teacher
+    // РЎСЉР·РґР°РІР° РѕР±РµРєС‚ РѕС‚ С‚РёРї Teacher
     Teacher t("Prof. Ivanov", 33, subjectsPointers, 3);
 
-    // Печата името на учителя
+    // РџРµС‡Р°С‚Р° РёРјРµС‚Рѕ РЅР° СѓС‡РёС‚РµР»СЏ
     std::cout << t.getName() << std::endl;
 
-    // Освобождава паметта на указателите, но не и самите низове
+    // РћСЃРІРѕР±РѕР¶РґР°РІР° РїР°РјРµС‚С‚Р° РЅР° СѓРєР°Р·Р°С‚РµР»РёС‚Рµ, РЅРѕ РЅРµ Рё СЃР°РјРёС‚Рµ РЅРёР·РѕРІРµ
     delete[] subjectsPointers; // only the pointers - not the data!
 
     return 0;
