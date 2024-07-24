@@ -4,5 +4,5 @@
 class AnimalFactory
 {
 public:
-	static Animal* create(AnimalType type);  // Статичен метод за създаване на обекти от тип Animal в зависимост от AnimalType
+	static Animal* create(AnimalType type);  // РЎС‚Р°С‚РёС‡РµРЅ РјРµС‚РѕРґ Р·Р° СЃСЉР·РґР°РІР°РЅРµ РЅР° РѕР±РµРєС‚Рё РѕС‚ С‚РёРї Animal РІ Р·Р°РІРёСЃРёРјРѕСЃС‚ РѕС‚ AnimalType
 };
