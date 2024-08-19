@@ -5,8 +5,8 @@
 // Структура, която управлява броячите на shared and weak указатели.
 struct Counter
 {
-    unsigned useCount = 0; // Брояч на споделените указатели.
-    unsigned weakCount = 0; // Брояч на слабите указатели.
+    unsigned useCount = 0; // Брояч на shared указатели.
+    unsigned weakCount = 0; // Брояч на weak указатели.
 
     // Намалява броя на shared указатели и евентуално weak указатели.
     void removeSharedPtr()

@@ -49,7 +49,7 @@ void Optional<T>::copyFrom(const Optional& val)
 }
 
 template<class T>
-Optional<T>::Optional(const T& arg) : data(new T(arg)) {}
+Optional<T>::Optional(const T& arg) : data(new T(arg)) {} // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 template<class T>
 Optional<T>::Optional(const Optional& other)
